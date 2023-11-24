@@ -52,14 +52,15 @@ const toggleStep = (stepImg, isComplete) => {
 
     //TOGGLE VISIBILITY FOR ACCORDIONS.
     //Firstly, check if the present accordion is closed else close it
-    if (setupAccordionContent.classList.contains("flex")){
-        setupAccordionContent.classList.toggle("hidden");
-        setupAccordionContent.classList.toggle("flex");
-    }
+    //if setupAccordion has flex in classList then execute code below
+        setupAccordionContent.classList.toggle("hidden", !isComplete);
+        setupAccordionContent.classList.toggle("flex", isComplete);
+    //endif
 
     //open the next accordion item
-    if(closestAccordionItem.nextElementSibling !== null) {
-        const nextSetupAccordionContent = closestAccordionItem.nextElementSibling.querySelector(".accordion-item-content");
+    const nextSetupAccordionItem = closestAccordionItem.nextElementSibling;
+    if (nextSetupAccordionItem !== null) {
+        const nextSetupAccordionContent = nextSetupAccordionItem.querySelector(".accordion-item-content");
         nextSetupAccordionContent.classList.remove("hidden");
         nextSetupAccordionContent.classList.add("flex");
     }

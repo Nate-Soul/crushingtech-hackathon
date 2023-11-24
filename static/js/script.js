@@ -2,6 +2,7 @@
 const closePlanAlertBtn = document.querySelector("#closePlanAlert");
 const planAlert         = document.querySelector("#planAlert");
 
+//check if both elements exist before adding the event listener
 if (closePlanAlertBtn && planAlert ) {
     closePlanAlertBtn.addEventListener("click", () => {
         planAlert.classList.remove("flex");
@@ -14,69 +15,64 @@ const setupCardToggleBtn  = document.querySelector("#setupCardToggleBtn");
 const setupCardBody       = document.querySelector("#setupCardBody");
 const setupCardToggleImgs = setupCardToggleBtn.children;
 
+//check if elements of the setup card exist before adding an event listener that toggles the card
 if ( setupCardToggleBtn && setupCardBody && setupCardToggleImgs ) {
     setupCardToggleBtn.addEventListener("click", () => {
-        if ( setupCardBody.classList.contains("flex") ) {
-            setupCardBody.classList.remove("flex");
-            setupCardBody.classList.add("hidden");
-            Array.from(setupCardToggleImgs).forEach(setupCardToggleImg => {
-                if ( setupCardToggleImg.classList.contains("hidden") ) {
-                    setupCardToggleImg.classList.remove("hidden");
-                } else {
-                    setupCardToggleImg.classList.add("hidden");
-                }
-            });
-        } else if ( setupCardBody.classList.contains("hidden") ) {
-            setupCardBody.classList.remove("hidden");
-            setupCardBody.classList.add("flex");
-            Array.from(setupCardToggleImgs).forEach(setupCardToggleImg => {
-                if ( setupCardToggleImg.classList.contains("hidden") ) {
-                    setupCardToggleImg.classList.remove("hidden");
-                } else {
-                    setupCardToggleImg.classList.add("hidden");
-                }
-            });
-        }
+        setupCardBody.classList.toggle("flex");
+        setupCardBody.classList.toggle("hidden");
+        Array.from(setupCardToggleImgs).forEach(setupCardToggleImg => {
+            setupCardToggleImg.classList.toggle("hidden");
+        });
     });
 }
 
 //  TOGGLER FUNCTION FOR DROPDOWN MENUS
 const dropdownTogglers = document.querySelectorAll(".dropdown-toggler");
 
-if (dropdownTogglers) {
+if (dropdownTogglers.length > 0) {
     dropdownTogglers.forEach(dropdownToggler => {
         dropdownToggler.addEventListener("click", () => {
-            if (dropdownToggler.nextElementSibling.classList.contains("hidden")) {
-                dropdownToggler.nextElementSibling.classList.remove("hidden");
-                dropdownToggler.nextElementSibling.classList.add("flex");
-            } else {
-                dropdownToggler.nextElementSibling.classList.remove("flex");
-                dropdownToggler.nextElementSibling.classList.add("hidden");
-            }
+            const dropdownMenu = dropdownToggler.nextElementSibling;
+            dropdownMenu.classList.toggle("hidden");
+            dropdownMenu.classList.toggle("flex");
         });
     });
 }
 
 
 // TOGGLE BETWEEN COMPLETE STEP && INCOMPLETE STEP FOR THE SETUP FORM
+const toggleStep = (stepImg, isComplete) => {
+    const targetStep = isComplete ? stepImg.previousElementSibling : stepImg.nextElementSibling;
+    const closestAccordionItem  = stepImg.closest(".accordion-item");
+    const setupAccordionContent = closestAccordionItem.querySelector(".accordion-item-content");
+
+    //TOGGLE VISIBILTY FOR STEPS
+    targetStep.classList.toggle("hidden");
+    stepImg.classList.toggle("hidden");
+
+    //TOGGLE VISIBILITY FOR ACCORDIONS.
+    //Firstly, check if the present accordion is closed else close it
+    if (setupAccordionContent.classList.contains("flex")){
+        setupAccordionContent.classList.toggle("hidden");
+        setupAccordionContent.classList.toggle("flex");
+    }
+
+    //open the next accordion item
+    if(closestAccordionItem.nextElementSibling !== null) {
+        const nextSetupAccordionContent = closestAccordionItem.nextElementSibling.querySelector(".accordion-item-content");
+        nextSetupAccordionContent.classList.remove("hidden");
+        nextSetupAccordionContent.classList.add("flex");
+    }
+}
+
 const incompleteStepImgs = document.querySelectorAll(".incomplete-step-img");
 const completeStepImgs   = document.querySelectorAll(".complete-step-img");
-
 if (incompleteStepImgs.length > 0 && completeStepImgs.length > 0) {
     incompleteStepImgs.forEach(incompleteStepImg => {
-        incompleteStepImg.addEventListener("click", () => {
-            const completeStepImgElem = incompleteStepImg.nextElementSibling;
-            completeStepImgElem.classList.remove("hidden");
-            incompleteStepImg.classList.add("hidden");
-        });
+        incompleteStepImg.addEventListener("click", () => { toggleStep(incompleteStepImg, false) });
     });
-
     completeStepImgs.forEach(completeStepImg => {
-        completeStepImg.addEventListener("click", () => {
-            const incompleteStepImgElem = completeStepImg.previousElementSibling;
-            incompleteStepImgElem.classList.remove("hidden");
-            completeStepImg.classList.add("hidden");
-        });
+        completeStepImg.addEventListener("click", () => { toggleStep(completeStepImg, true) });
     });
 }
 
@@ -87,13 +83,12 @@ const setupAccordionContents = setupAccordionElem.querySelectorAll(".accordion-i
 setupAccordionTogglers.forEach(setupAccordionToggler => {
     setupAccordionToggler.addEventListener("click", () => {
         setupAccordionContents.forEach(setupAccordionContent => {
-            if (setupAccordionContent.classList.contains("flex")) {
-                setupAccordionContent.classList.add("hidden");
-                setupAccordionContent.classList.remove("flex");
-            }
+            setupAccordionContent.classList.add("hidden");
+            setupAccordionContent.classList.remove("flex");
         });
+
         const ownAccordionContent  = setupAccordionToggler.parentElement.parentElement.querySelector(".accordion-item-content");
-        ownAccordionContent.classList.add("flex");
-        ownAccordionContent.classList.remove("hidden");
+        ownAccordionContent.classList.toggle("flex");
+        ownAccordionContent.classList.toggle("hidden");
 });
 });

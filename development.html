@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="bg-light relative">
+    <header>
+        <nav id="topNavigation" class="bg-gray-300 text-light py-3">
+            <div class="container flex items-center justify-between">
+                <a href="https://shopify.com">
+                    <img src="images/logo.svg" alt="Shopify textual iconic logo" class="img-fluid md-only">
+                    <img src="images/logo-icon.svg" alt="Shopify iconic logo" class="img-fluid sm-only">
+                </a>
+                <form 
+                    id="NavbarSearchForm" 
+                    class="relative"
+                    role="textbox"
+                >
+                    <!-- <label for="NavbarSearchInput"> -->
+                        <img src="images/search-icon.svg" alt="" height="15" width="15" class="navbar-search-icon absolute">
+                    <!-- </label> -->
+                    <input 
+                        type="search" 
+                        name="navbar_search_input" 
+                        id="NavbarSearchInput" 
+                        class="bg-gray-200 text-white pl-8 h-8 border border-stroke-200 p-2 rounded" 
+                        placeholder="Search"
+                    >
+                </form>
+                <ul class="flex items-center gap-3">
+                    <li class="nav-item">
+                        <a role="button" href="#" class="nav-link w-8 dropdown-toggler ">
+                            <img src="./images/bell.svg" alt="" width="20" height="20">
+                        </a>
+                        <ul 
+                            class="dropdown-menu flex-col gap-2 shadow-lg absolute bg-white text-gray-300 p-3 rounded z-40 hidden"
+                            role="menu"
+                            >
+                            <li class="flex justify-between items-center">
+                                Alerts
+                                <div class="inline-flex items-center gap-3">
+                                    <button type="button" class="bg-transparent h-8 w-8">
+                                        <img src="./images/earthing.svg" alt="" width="20" height="20">
+                                    </button>
+                                    <button type="button" class="bg-transparent h-8 w-8">
+                                        <img src="./images/check-circle-sm.svg" alt="" width="20" height="20">
+                                    </button>
+                                </div>
+                            </li>
+                            <li class="dropdown-menu-item" role="menuitem">
+                                Alerts about your store and account will show here
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a role="button" href="#" class="nav-link nav-link-btn p-px pl-2 gap-2 dropdown-toggler">
+                            <span class="md-only">Davii Collections</span>
+                            <span 
+                                class="inline-flex justify-center items-center rounded-sm h-7 w-7 bg-alt text-gray-300"
+                                
+                            >
+                                DC
+                            </span>
+                        </a>
+                        <div 
+                            class="dropdown-menu flex-col gap-2 shadow-lg absolute bg-white text-gray-300 py-3 px-1 rounded z-50 hidden"
+                            role="menu"
+                            >
+                            <div class="dropdown-menu-item"  role="menuitem">
+                                <div class="inline-flex gap-2 items-center">
+                                    <span 
+                                        class="inline-flex justify-center items-center rounded-sm h-7 w-7 bg-alt text-gray-300"
+                                        
+                                    >
+                                        DC
+                                    </span>
+                                    Davii Collections
+                                </div>
+                                <img src="./images/check-circle-sm.svg" alt="" height="16" width="16">
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    <img src="./images/shop.svg" alt="" height="20" width="20">
+                                    All Stores
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    Help Center
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    Changelog
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    Community Forums
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    Hire a Shopify Partner
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div class="inline-flex gap-2 items-center">
+                                    Keyboard Shortcuts
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div>
+                                    David Michael <br>
+                                    <span class="text-12 font-regular">davidmichael@gmail.com</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div>
+                                    Manage Account
+                                </div>
+                            </div>
+                            <div class="dropdown-menu-item" role="menuitem" >
+                                <div>
+                                    Logout
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="py-8" id="setupSection">
+            <div class="container w-60">
+                <div role="alert" id="planAlert" class="relative flex items-center justify-between bg-gray-300 text-light py-3 pr-8 px-5 rounded">
+                    <p>Extend your plans for &dollar;1 for 3 months on select plans</p>
+                    <a href="https://shopify.com/pricing" class="btn btn-white mr-5">Select a plan</a>
+                    <button type="button" class="close-plan-alert absolute bg-transparent h-8 w-8 rounded-sm">
+                        <img src="./images/times.svg" alt="" width="20" height="20">
+                    </button>
+                </div>
+                <div id="setupCard" class="my-4 rounded-lg bg-white shadow-y border border-stroke p-5">
+                    <header id="setupCardHeader">
+                        <div class="flex items-start justify-between mb-5">
+                            <hgroup> 
+                                <h2>Setup guide</h2>
+                                <h5>Use this personalized guide to get your store up and running</h5>
+                            </hgroup>
+                            <button type="button" id="setupCardToggleBtn" class="bg-transparent">
+                                <img src="./images/chevron-up.svg" alt="" height="25" width="25">
+                                <img src="./images/chevron-down.svg" alt="" height="25" width="25" class="hidden">
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <p><span id="stepsCompleted"></span> / <span id="totalSteps"></span> Completed</p>
+                            <div id="setupProgressBar" class="bg-light rounded h-px overflow-hidden w-10">
+                                <div id="setupProgressIndicator" class="bg-gray-300 h-100 w-0"></div>
+                            </div>
+                        </div>
+                    </header>
+                    <div id="setupCardBody" class="setup-accordion flex flex-col gap-5 mt-8">
+                        <div class="accordion-item rounded p-2">
+                            <div class="accordion-item-header flex items-center gap-2">
+                                <img src="./images/dotted-circle.svg" alt="" width="25" height="25" class="incomplete-step-img">
+                                <img src="./images/check-circle-fill-lg.svg" alt="" width="25" height="25" class="hidden complete-step-img">
+                                <button type="button" class="accordion-item-toggler bg-transparent w-max">
+                                    Customize your online store
+                                </button>
+                            </div>
+                            <div class="accordion-item-content pl-8 hidden items-center justify-between">
+                                <div class="flex flex-col gap-5">
+                                    <p>
+                                        Choose a theme and add your logo, colors, and images to reflect your brand.  
+                                        <a href="http://shopify.com" class="font-semibold">Learn more.</a>
+                                    </p>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" class="btn btn-dark">
+                                            Customize theme
+                                        </button>
+                                    </div>
+                                </div>
+                                <img src="./images/customise-store.png" alt="website mockup" class="img-fluid md-only">
+                            </div>
+                        </div>
+                        <div class="accordion-item rounded p-2">
+                            <div class="accordion-item-header flex items-center gap-2">
+                                <img src="./images/dotted-circle.svg" alt="" width="25" height="25" class="incomplete-step-img">
+                                <img src="./images/check-circle-fill-lg.svg" alt="" width="25" height="25" class="hidden complete-step-img">
+                                <button type="button" class="accordion-item-toggler bg-transparent w-max">
+                                    Add your first product
+                                </button>
+                            </div>
+                            <div class="accordion-item-content pl-8 hidden items-center justify-between">
+                                <div class="flex flex-col gap-5">
+                                    <p>
+                                        Write a description, add photos, and set prices you plan to sell 
+                                        <a href="http://shopify.com" class="font-semibold">Learn more.</a>
+                                    </p>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" class="btn btn-dark">
+                                            Add product
+                                        </button>
+                                        <button type="button" class="text-gray-300 p-2 rounded font-semibold">
+                                            Import product
+                                        </button>
+                                    </div>
+                                </div>
+                                <img src="./images/product.png" alt="product catalog" class="img-fluid md-only">
+                            </div>
+                        </div>
+                        <div class="accordion-item rounded p-2">
+                            <div class="accordion-item-header flex items-center gap-2">
+                                <img src="./images/dotted-circle.svg" alt="" width="25" height="25" class="incomplete-step-img">
+                                <img src="./images/check-circle-fill-lg.svg" alt="" width="25" height="25" class="hidden complete-step-img">
+                                <button type="button" class="accordion-item-toggler bg-transparent w-max">
+                                    Add a custom domain
+                                </button>
+                            </div>
+                            <div class="accordion-item-content pl-8 hidden items-center justify-between">
+                                <div class="flex flex-col gap-5">
+                                    <p>
+                                        Your current domain is 222219.myshopify.com but you can add a custom domain to help customers find your online store. 
+                                        <a href="http://shopify.com" class="font-semibold">Learn more.</a>
+                                    </p>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" class="btn btn-dark">
+                                            Add domain
+                                        </button>
+                                    </div>
+                                </div>
+                                <img src="./images/website.png" alt="product catalog"  class="img-fluid md-only">
+                            </div>
+                        </div>
+                        <div class="accordion-item rounded p-2">
+                            <div class="accordion-item-header flex items-center gap-2">
+                                <img src="./images/dotted-circle.svg" alt="" width="25" height="25" class="incomplete-step-img">
+                                <img src="./images/check-circle-fill-lg.svg" alt="" width="25" height="25" class="hidden complete-step-img">
+                                <button type="button" class="accordion-item-toggler bg-transparent w-max">
+                                    Name your store
+                                </button>
+                            </div>
+                            <div class="accordion-item-content pl-8 hidden items-center justify-between">
+                                <div class="flex flex-col gap-5">
+                                    <p>
+                                        Your temporary store name is currently Davii collections. The store name appears in your admin and your online store. 
+                                        <a href="http://shopify.com" class="font-semibold">Learn more.</a>
+                                    </p>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" class="btn btn-dark">
+                                            Name store
+                                        </button>
+                                    </div>
+                                </div>
+                                <img src="./images/name-store.png" alt="mockup website showing editable cursor"  class="img-fluid md-only">
+                            </div>
+                        </div>
+                        <div class="accordion-item rounded p-2">
+                            <div class="accordion-item-header flex items-center gap-2">
+                                <img src="./images/dotted-circle.svg" alt="" width="25" height="25" class="incomplete-step-img">
+                                <img src="./images/check-circle-fill-lg.svg" alt="" width="25" height="25" class="hidden complete-step-img">
+                                <button type="button" class="accordion-item-toggler bg-transparent w-max">
+                                    Set up a payment provider
+                                </button>
+                            </div>
+                            <div class="accordion-item-content pl-8 hidden items-center justify-between">
+                                <div class="flex flex-col gap-5">
+                                    <p>
+                                        Choose a payment provider to start accepting payments. You ll need to create an account with the payment provider and set it up with your Shopify store.  
+                                        <a href="http://shopify.com" class="font-semibold">Learn more.</a>
+                                    </p>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" class="btn btn-dark">
+                                            Set up payment
+                                        </button>
+                                    </div>
+                                </div>
+                                <img src="./images/payment.png" alt="mockup website showing payment options" class="img-fluid md-only">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="static/js/script.js"></script>
+</body>
+</html>

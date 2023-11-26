@@ -1,12 +1,12 @@
 // CLOSE THE SHOW PLANS NOTIFICATION / ALERT
-const closePlanAlertBtn = document.querySelector("#closePlanAlert");
+const closePlanAlertBtn = document.querySelector(".close-plan-alert");
 const planAlert         = document.querySelector("#planAlert");
 
 //check if both elements exist before adding the event listener
 if (closePlanAlertBtn && planAlert ) {
     closePlanAlertBtn.addEventListener("click", () => {
-        planAlert.classList.remove("flex");
-        planAlert.classList.add("hidden");
+        planAlert.classList.toggle("flex");
+        planAlert.classList.toggle("hidden");
     });
 }
 
@@ -50,25 +50,43 @@ const toggleStep = (stepImg, isComplete) => {
     targetStep.classList.toggle("hidden");
     stepImg.classList.toggle("hidden");
 
-    //TOGGLE VISIBILITY FOR ACCORDIONS.
-    //Firstly, check if the present accordion is closed else close it
-    //if setupAccordion has flex in classList then execute code below
-        setupAccordionContent.classList.toggle("hidden", !isComplete);
-        setupAccordionContent.classList.toggle("flex", isComplete);
-    //endif
+    
+    //TOGGLE VISIBILITY FOR ACCORDIONS & UPDATE THE PROGRESS BAR
+    if (isComplete) {
+        //UPDATE PROGRESS INDICATOR
+        parseInt(currentStepsDisplay.textContent--);
+        updateProgress();
+    } else {
+        parseInt(currentStepsDisplay.textContent++);
+        updateProgress();
+    }
 
+    //check if the present accordion is closed else close it
+    if (setupAccordionContent.classList.contains("flex")) {
+        setupAccordionContent.classList.add("hidden");
+        setupAccordionContent.classList.remove("flex");
+        setupAccordionContent.parentElement.classList.remove("active");
+    }
     //open the next accordion item
     const nextSetupAccordionItem = closestAccordionItem.nextElementSibling;
     if (nextSetupAccordionItem !== null) {
         const nextSetupAccordionContent = nextSetupAccordionItem.querySelector(".accordion-item-content");
         nextSetupAccordionContent.classList.remove("hidden");
         nextSetupAccordionContent.classList.add("flex");
+        nextSetupAccordionItem.classList.add("active");
     }
 }
 
-const incompleteStepImgs = document.querySelectorAll(".incomplete-step-img");
-const completeStepImgs   = document.querySelectorAll(".complete-step-img");
-if (incompleteStepImgs.length > 0 && completeStepImgs.length > 0) {
+const incompleteStepImgs     = document.querySelectorAll(".incomplete-step-img");
+const completeStepImgs       = document.querySelectorAll(".complete-step-img");
+const totalStepsDisplay      = document.querySelector("#totalSteps");
+const currentStepsDisplay    = document.querySelector("#stepsCompleted");
+const setupProgressIndicator = document.querySelector("#setupProgressIndicator");
+const totalSteps             = incompleteStepImgs.length;
+
+if (totalSteps > 0 && completeStepImgs.length > 0) {
+    totalStepsDisplay.textContent = totalSteps;
+    currentStepsDisplay.textContent = 0;
     incompleteStepImgs.forEach(incompleteStepImg => {
         incompleteStepImg.addEventListener("click", () => { toggleStep(incompleteStepImg, false) });
     });
@@ -76,6 +94,13 @@ if (incompleteStepImgs.length > 0 && completeStepImgs.length > 0) {
         completeStepImg.addEventListener("click", () => { toggleStep(completeStepImg, true) });
     });
 }
+
+const updateProgress = () => {
+    const currentProgress    = parseInt(currentStepsDisplay.textContent);
+    const calculatedProgress = (currentProgress / totalSteps) * 100;
+    setupProgressIndicator.style.width = `${calculatedProgress}%`;
+}
+
 
 // SET UP ACCORDION CONFIGURATION
 const setupAccordionElem     = document.querySelector(".setup-accordion");
@@ -86,10 +111,12 @@ setupAccordionTogglers.forEach(setupAccordionToggler => {
         setupAccordionContents.forEach(setupAccordionContent => {
             setupAccordionContent.classList.add("hidden");
             setupAccordionContent.classList.remove("flex");
+            setupAccordionContent.parentElement.classList.remove("active");
         });
 
         const ownAccordionContent  = setupAccordionToggler.parentElement.parentElement.querySelector(".accordion-item-content");
         ownAccordionContent.classList.toggle("flex");
         ownAccordionContent.classList.toggle("hidden");
+        setupAccordionToggler.parentElement.parentElement.classList.add("active");
 });
 });

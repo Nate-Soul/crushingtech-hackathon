@@ -1,14 +1,21 @@
 // TOGGLE BETWEEN COMPLETE STEP && INCOMPLETE STEP FOR THE SETUP FORM
 const toggleStep = (stepImg, isComplete, currentStepsDisplay, totalSteps) => {
-    const targetStep = isComplete ? stepImg.previousElementSibling : stepImg.nextElementSibling;
+    const stepToggler           = stepImg.parentElement;
+    const incompleteStepImg     = stepToggler.querySelector("img.incomplete-step-img");
+    const intermissionStepImg   = stepToggler.querySelector("img.intermission-step-img");
+    const completeStepimg       = stepToggler.querySelector("img.complete-step-img");
+    const targetStep            = isComplete ? incompleteStepImg : completeStepimg;
     const closestAccordionItem  = stepImg.closest(".accordion-item");
     const setupAccordionContent = closestAccordionItem.querySelector(".accordion-body-content");
     const setupAccordionImg     = closestAccordionItem.querySelector(".accordion-img");
 
     //TOGGLE VISIBILTY FOR STEPS
-    targetStep.classList.toggle("hidden");
+    setTimeout(() => {
+        targetStep.classList.toggle("hidden");
+        intermissionStepImg.classList.toggle("hidden");
+    }, 1500);
+    intermissionStepImg.classList.toggle("hidden");
     stepImg.classList.toggle("hidden");
-
     
     //TOGGLE VISIBILITY FOR ACCORDIONS & UPDATE THE PROGRESS BAR
     if (isComplete) {
@@ -62,7 +69,7 @@ const toggleAccordion = (accordionToggler) => {
     ownAccordionContent.classList.toggle("flex");
     ownAccordionContent.classList.toggle("hidden");
     ownAccordionImg.classList.toggle("hidden");
-    accordionItem.classList.toggle("active");
+    accordionItem.classList.add("active");
 }
 
 const updateProgress = (currentStepsDisplay, totalSteps) => {

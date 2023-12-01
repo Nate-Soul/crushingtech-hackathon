@@ -790,6 +790,28 @@ button, a[role="button"] {
 .accordion-img{
     flex-shrink: 0;
 }
+
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}
+
+.animate-spin{
+    animation: 1s infinite spin;
+    -webkit-animation: 1s infinite spin;
+}
 .sm-only{
     display: none;
 }
@@ -842,7 +864,7 @@ button, a[role="button"] {
     }
     #planAlert .plan-alert-buttons{
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: start;
         gap: unset;
     }
     #topNavigation .nav-link{

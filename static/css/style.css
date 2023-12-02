@@ -809,8 +809,8 @@ button, a[role="button"] {
 }
 
 .animate-spin{
-    animation: 1s infinite spin;
-    -webkit-animation: 1s infinite spin;
+    animation: .5s infinite spin;
+    -webkit-animation: .5s infinite spin;
 }
 .sm-only{
     display: none;

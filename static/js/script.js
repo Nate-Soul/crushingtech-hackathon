@@ -8,22 +8,25 @@ const toggleStep = (stepImg, isComplete, currentStepsDisplay, totalSteps) => {
     const closestAccordionItem  = stepImg.closest(".accordion-item");
     const setupAccordionContent = closestAccordionItem.querySelector(".accordion-body-content");
     const setupAccordionImg     = closestAccordionItem.querySelector(".accordion-img");
+    const setupAccordionToggler = closestAccordionItem.querySelector(".accordion-item-toggler");
 
     //TOGGLE VISIBILTY FOR STEPS
     setTimeout(() => {
         targetStep.classList.toggle("hidden");
         intermissionStepImg.classList.toggle("hidden");
-    }, 1500);
+    }, 1000);
     intermissionStepImg.classList.toggle("hidden");
     stepImg.classList.toggle("hidden");
     
     //TOGGLE VISIBILITY FOR ACCORDIONS & UPDATE THE PROGRESS BAR
     if (isComplete) {
+        stepToggler.ariaChecked = "false";
         //UPDATE PROGRESS INDICATOR
         parseInt(currentStepsDisplay.textContent--);
         updateProgress(currentStepsDisplay, totalSteps);
 
     } else {
+        stepToggler.ariaChecked = "true";
         parseInt(currentStepsDisplay.textContent++);
         updateProgress(currentStepsDisplay, totalSteps);
     }
@@ -32,6 +35,8 @@ const toggleStep = (stepImg, isComplete, currentStepsDisplay, totalSteps) => {
     if (setupAccordionContent.classList.contains("flex")) {
         setupAccordionContent.classList.add("hidden");
         setupAccordionContent.classList.remove("flex");
+        setupAccordionContent.ariaHidden = "true";
+        setupAccordionToggler.ariaExpanded = "false";
         setupAccordionImg.classList.add("hidden");
         closestAccordionItem.classList.remove("active");
     }
@@ -41,8 +46,11 @@ const toggleStep = (stepImg, isComplete, currentStepsDisplay, totalSteps) => {
     if (nextSetupAccordionItem !== null) {
         const nextSetupAccordionContent = nextSetupAccordionItem.querySelector(".accordion-body-content");
         const nextSetupAccordionImg     = nextSetupAccordionItem.querySelector(".accordion-img");
+        const nextSetupAccordionToggler = nextSetupAccordionItem.querySelector(".accordion-item-toggler");
         nextSetupAccordionContent.classList.add("flex");
         nextSetupAccordionContent.classList.remove("hidden");
+        nextSetupAccordionContent.ariaHidden = "false";
+        nextSetupAccordionToggler.ariaExpanded = "true";
         nextSetupAccordionImg.classList.remove("hidden");
         nextSetupAccordionItem.classList.add("active");
     }
@@ -55,17 +63,23 @@ const toggleAccordion = (accordionToggler) => {
     const accordionContents = accordionElem.querySelectorAll(".accordion-body-content");
     const accordionImgs     = accordionElem.querySelectorAll(".accordion-img");
 
+    //close all other accordions that are opened
     accordionContents.forEach((accordionContent, index) => {
         if(accordionContent.classList.contains("flex")) {
+            accordionContent.ariaHidden = "true";
+            accordionContent.previousElementSibling.ariaExpanded = "false";
             accordionContent.classList.add("hidden");
             accordionContent.classList.remove("flex");
             accordionImgs.item(index).classList.toggle("hidden");
-            accordionItem.classList.remove("active");
+            accordionContent.parentElement.parentElement.parentElement.classList.remove("active");
         }
     });
 
+    //open the clicked accordion
     const ownAccordionContent  = accordionItem.querySelector(".accordion-body-content");
     const ownAccordionImg      = accordionItem.querySelector(".accordion-img");
+    ownAccordionContent.ariaHidden = "false";
+    accordionToggler.ariaExpanded = "true";
     ownAccordionContent.classList.toggle("flex");
     ownAccordionContent.classList.toggle("hidden");
     ownAccordionImg.classList.toggle("hidden");

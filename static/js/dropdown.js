@@ -11,9 +11,15 @@ const toggleDropDownMenu = (dropdownToggler) => {
         if (dropdownMenu.classList.contains("flex")) {
             //set aria-expanded to true
             dropdownToggler.ariaExpanded = "true";
-            //get the dropdown menu item and focus on it
-            const firstDropdownMenuItem = dropdownMenu.querySelector("[role='menuitem']");
-            firstDropdownMenuItem.focus();
+            //get all dropdown menu items
+            const dropdownMenuItems = dropdownMenu.querySelectorAll("[role='menuitem']");
+            //focus on the first one
+            dropdownMenuItems.item(0).focus();
+            dropdownMenuItems.forEach((dropdownMenuItem, menuItemIndex) => {
+                dropdownMenuItem.addEventListener("keyup", (event) => { 
+                    handleMenuNavigation(event, dropdownMenuItem, menuItemIndex);
+                });
+            });
         } else {
             //set aria-expanded to false
             dropdownToggler.ariaExpanded = "false";
@@ -25,27 +31,24 @@ const toggleDropDownMenu = (dropdownToggler) => {
         // console.log(isDropdownMenuExpanded);
 }
 
-const handleMenuNavigation = (event, dropdownMenuItem) => {
+const handleMenuNavigation = (event, dropdownMenuItem, menuItemIndex) => {
 
+    event.preventDefault();
+    
     const dropdownMenu      = dropdownMenuItem.parentElement.parentElement;
     const dropdownMenuItems = dropdownMenu.querySelectorAll(".dropdown-menu-item[role='menuitem']");
-    const menuItemIndex     = Array.prototype.indexOf.call(dropdownMenuItems);
-    const isLastItem        = menuItemIndex === dropdownMenuItems.length - 1;
     const isFirstItem       = menuItemIndex === 0;
-    const previousIndex     = isFirstItem ? dropdownMenuItems.length - 1 : menuItemIndex - 1;
-    const nextIndex         = isLastItem ? 0 : menuItemIndex + 1;
-
-    console.log(menuItemIndex);
+    const isLastItem        = menuItemIndex === dropdownMenuItems.length - 1;
+    const previousIndex     = isFirstItem ? dropdownMenuItems.length - 1 : --menuItemIndex;
+    const nextIndex         = isLastItem ? 0 : ++menuItemIndex;
 
     switch (event.key) {
         case "ArrowDown":
         case "ArrowRight":
-            event.preventDefault();
             dropdownMenuItems.item(nextIndex).focus();
             break;
         case "ArrowUp":
         case "ArrowLeft":
-            event.preventDefault();
             dropdownMenuItems.item(previousIndex).focus();
             break;
         case "Escape":
@@ -70,13 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //check if dropdown menu items are present in the dom
-    if (dropdownMenuItems.length > 0) {
-        //loop through menu togglers and listen for keyup event
-        dropdownMenuItems.forEach((dropdownMenuItem) => {
-            dropdownMenuItem.addEventListener("keyup", (e) => { 
-                handleMenuNavigation(e, dropdownMenuItem) 
-            });
-        });
-    }
+    // if (dropdownMenuItems.length > 0) {
+    //     //loop through menu togglers and listen for keyup event
+    //     dropdownMenuItems.forEach((dropdownMenuItem) => {
+    //         dropdownMenuItem.addEventListener("keyup", (e) => { 
+    //             handleMenuNavigation(e, dropdownMenuItem) 
+    //         });
+    //     });
+    // }
 
 });

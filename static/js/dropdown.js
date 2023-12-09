@@ -34,7 +34,7 @@ const toggleDropDownMenu = (dropdownToggler) => {
 const handleMenuNavigation = (event, dropdownMenuItem, menuItemIndex) => {
 
     event.preventDefault();
-    
+
     const dropdownMenu      = dropdownMenuItem.parentElement.parentElement;
     const dropdownMenuItems = dropdownMenu.querySelectorAll(".dropdown-menu-item[role='menuitem']");
     const isFirstItem       = menuItemIndex === 0;
@@ -60,7 +60,7 @@ const handleMenuNavigation = (event, dropdownMenuItem, menuItemIndex) => {
 document.addEventListener("DOMContentLoaded", () => {
     //get all dropdown menu togglers
     const dropdownTogglers  = document.querySelectorAll(".dropdown-toggler");
-    const dropdownMenuItems = document.querySelectorAll(".dropdown-menu-item[role='menuitem']");
+    // const dropdownMenuItems = document.querySelectorAll(".dropdown-menu-item[role='menuitem']");
 
     //check if there's any dropdownmenu in the dom before executing logic
     if (dropdownTogglers.length > 0) {

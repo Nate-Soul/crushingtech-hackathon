@@ -790,6 +790,12 @@ button, a[role="button"] {
 .accordion-img{
     flex-shrink: 0;
 }
+.accordion-body summary{
+    cursor: pointer;
+}
+.accordion-body summary::marker{
+    font-size: 0;
+}
 
 @keyframes spin{
     0%{

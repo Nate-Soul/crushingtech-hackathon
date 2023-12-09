@@ -150,7 +150,13 @@
                         <div class="flex items-center gap-3 font-regular text-12">
                             <p><span id="stepsCompleted"></span> / <span id="totalSteps"></span> Completed</p>
                             <div id="setupProgressBar" class="bg-light-2 rounded h-px overflow-hidden w-18">
-                                <div id="setupProgressIndicator" class="bg-gray-300 h-100 w-0"></div>
+                                <div 
+                                    id="setupProgressIndicator" 
+                                    class="bg-gray-300 h-100 w-0"
+                                    aria-valuemax="100"
+                                    aria-valuemin="0"
+                                    aria-valuenow="0"
+                                ></div>
                             </div>
                         </div>
                     </div>
@@ -387,6 +393,39 @@
                             </div>
                             <img src="./images/payment.png" alt="website with payment option" class="img-fluid accordion-img hidden">
                         </div>
+                        <!-- Accordion experiment using details and summary tags -->
+                        <!-- <div class="accordion-item flex gap-24 items-stretch rounded p-2 pb-3 text-13 font-medium">
+                            <div class="accordion-item-inner flex items-start gap-2">
+                                <button 
+                                    type="button" class="complete-step-img-toggler btn-default-white rounded-sm">
+                                    <img src="./images/dotted-circle.svg" alt="" width="24" height="24"
+                                        class="incomplete-step-img">
+                                    <img src="./images/spinner.svg" alt="" width="24" height="24"
+                                        class="hidden intermission-step-img animate-spin">
+                                    <img src="./images/check-circle-fill-lg.svg" alt="" width="24" height="24"
+                                        class="hidden complete-step-img">
+                                </button>
+                                <details  class="accordion-body px-0 py-2px">
+                                    <summary class="mb-4">Setup a payment provider</summary>
+                                    <div class="flex gap-24 items-stretch">
+                                        <div class=" flex flex flex-col gap-4">
+                                            <p>
+                                                Your current domain is 222219.myshopify.com but you can add a custom domain to help customers find your online store.  
+                                                <a href="http://shopify.com" class="font-semibold">Learn more</a>
+                                            </p>
+                                            <div class="flex items-center gap-3">
+                                                <button type="button" class="btn btn-dark">
+                                                    Set up payment
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <img src="./images/customise-store.png" alt="some placeholder">
+                                    </div>
+                                </details>
+                                </div>
+                            </div>
+                            <img src="./images/payment.png" alt="website with payment option" class="img-fluid accordion-img hidden">
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        summary.accordion-toggler{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion">
+        <details 
+            class="accordion-body accordion-body-01"
+            open
+        >
+            <summary class="accordion-toggler"> User story 1 </summary>
+            <p class="accordion-body-content">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius aperiam quasi consequatur quis dolorum! Reprehenderit facere explicabo est tempore quidem beatae praesentium, facilis fugiat suscipit doloribus quo adipisci necessitatibus pariatur?
+            </p>
+        </details>
+        <details 
+            class="accordion-body accordion-body-02"
+        >
+            <summary class="accordion-toggler"> User story 2 </summary>
+            <p class="accordion-body-content">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius aperiam quasi consequatur quis dolorum! Reprehenderit facere explicabo est tempore quidem beatae praesentium, facilis fugiat suscipit doloribus quo adipisci necessitatibus pariatur?
+            </p>
+        </details>
+        <details 
+            class="accordion-body accordion-body-03"
+        >
+            <summary class="accordion-toggler"> User story 3 </summary>
+            <p class="accordion-body-content">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius aperiam quasi consequatur quis dolorum! Reprehenderit facere explicabo est tempore quidem beatae praesentium, facilis fugiat suscipit doloribus quo adipisci necessitatibus pariatur?
+            </p>
+        </details>
+        <details 
+            class="accordion-body accordion-body-04"
+        >
+            <summary class="accordion-toggler"> User story 4 </summary>
+            <p class="accordion-body-content">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius aperiam quasi consequatur quis dolorum! Reprehenderit facere explicabo est tempore quidem beatae praesentium, facilis fugiat suscipit doloribus quo adipisci necessitatibus pariatur?
+            </p>
+        </details>
+    </div>
+    <script>
+        //get all the summary tags
+        const accordionTogglers = document.querySelectorAll(".accordion-toggler");
+        //get all detail tags i.e accordion-bodies
+        const accordionBodies   = document.querySelectorAll(".accordion-body");
+
+        //loop through the summary tags
+        accordionTogglers.forEach((accordionToggler) => {
+
+            //add an event listener for a click event on the summary tag
+            accordionToggler.addEventListener("click", (e) => {
+                e.preventDefault();
+               
+                //loop through all the accordion bodies.
+                accordionBodies.forEach((accordionBody) => {
+                    //check if the accordion is open;
+                    if (accordionBody.hasAttribute("open")) {
+                        //close all open accordions
+                        accordionBody.removeAttribute("open");
+                    }
+                });
+
+                 //open the accordion that was clicked
+                const ownAccordionBody       = accordionToggler.parentElement;
+                const isOwnAccordionBodyOpen = ownAccordionBody.hasAttribute("open");
+                if (isOwnAccordionBodyOpen) {
+                    ownAccordionBody.removeAttribute("open");
+                } else {
+                    ownAccordionBody.setAttribute("open", "");
+                }
+            });
+        })
+    </script>
+</body>
+</html>

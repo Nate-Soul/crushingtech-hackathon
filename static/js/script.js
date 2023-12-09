@@ -91,6 +91,7 @@ const updateProgress = (currentStepsDisplay, totalSteps) => {
     const currentProgress    = parseInt(currentStepsDisplay.textContent);
     const calculatedProgress = (currentProgress / totalSteps) * 100;
     setupProgressIndicator.style.width = `${calculatedProgress}%`;
+    setupProgressIndicator.ariaValueNow = calculatedProgress;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
